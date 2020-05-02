@@ -7,6 +7,7 @@ fun main(){
     val b1 = Graph("b1",d, b)
     val a1 = Graph("a1",null, b1)
     val a = Graph("a",a1,b)
+    d.left = a1
     var x:Graph? = a
     var k = MutableList(1){0}
     var m: Int
@@ -19,17 +20,28 @@ fun main(){
             s = tenToTwo(i, n - 1)
             x = a
             k.add(0)
-            for (j in s.indices)
+            for (j in s.indices) {
                 if (where(s[j], x!!) != null) {
                     k[i]++
-                    x = where(s[j], x!!)
+                    x.pass = true
+                    x = where(s[j], x)
                 } else break
+                if (x!!.pass) {
+                    k[i] = 0
+                    break
+                }
+            }
+            x = a
+            for (j in s.indices)
+                if (where(s[j], x!!) != null) {
+                    x.pass = false
+                    x = where(s[j], x)
+                }else break
             println(k[i].toString() + "   -   $s")
         }
         n++
     }while (k.max()!=m)
     print(k!!.max())
-
 
 }
 fun where(i:Char,a:Graph):Graph?{

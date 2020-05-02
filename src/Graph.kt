@@ -1,5 +1,6 @@
 class Graph(s:String,l:Graph?,r:Graph?){
-    val value = s
+    var value = s
     var left:Graph? = l
-    val right:Graph? = r
+    var right:Graph? = r
+    var pass = false
 }
