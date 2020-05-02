@@ -8,20 +8,27 @@ fun main(){
     val a1 = Graph("a1",null, b1)
     val a = Graph("a",a1,b)
     var x:Graph? = a
-    val k = MutableList(0){0}
-    var s = ""
-    for (i in 0 until 2.toDouble().pow(5).toInt()){
-        s = tenToTwo(i,4)
-        x = a
-        k.add(0)
-        for (j in s.indices)
-            if (where(s[j],x!!)!=null){
-                k[i]++
-                x = where(s[j],x!!)
-            }else break
-        println(k[i].toString()+"   -   $s")
-    }
-    print(k.max())
+    var k = MutableList(1){0}
+    var m: Int
+    var n = 1
+    do {
+        m = k.max()!!
+        k = MutableList(0){0}
+        var s = ""
+        for (i in 0 until 2.toDouble().pow(n).toInt()) {
+            s = tenToTwo(i, n - 1)
+            x = a
+            k.add(0)
+            for (j in s.indices)
+                if (where(s[j], x!!) != null) {
+                    k[i]++
+                    x = where(s[j], x!!)
+                } else break
+            println(k[i].toString() + "   -   $s")
+        }
+        n++
+    }while (k.max()!=m)
+    print(k!!.max())
 
 
 }
